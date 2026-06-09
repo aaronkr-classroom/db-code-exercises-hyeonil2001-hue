@@ -1,0 +1,50 @@
+step1 : 동아리 관리 /
+
+step2 :
+사용자 - 동아리장, 동아리원
+
+요구사항 - 
+1. (동아리장) 동아리원을 가입시키거나 추방한다
+2. (동아리장) 동아리원의 직책을 부여한다
+3. (동아리원) 자신의 개인정보를 입력한다
+4. (동아리원) 동아리를 탈퇴한다
+5. (동아리원) 동아리 가입 신청을 한다
+
+step3 :
+
+엔티티 : 동아리, 동아리원
+동아리 - id, name, kind
+동아리원 - id, name, age, club_id, club_president
+ 
+step4 :
+create table club (
+	id bigserial primary key,
+	name varchar(50) not null,
+	kind varchar(30)
+)
+
+insert into club(name, kind)
+values
+	('테니스', '운동'),
+	('코딩', '공부'),
+	('야구', '운동')
+
+select * from club where kind='운동'
+
+//
+
+create table club_member (
+	id bigserial primary key,
+	name varchar(50) not null,
+	age int not null,
+	club_id foreign key references club(id),
+	is_club_president boolean not null
+)
+
+insert into club_member(name, age, club_id, is_club_president)
+values
+	('kim1', 20, '1', true),
+	('eom2', 30, '2', false),
+	('jong3', 99, '3', true)
+
+select * from club where is_club_president=true
